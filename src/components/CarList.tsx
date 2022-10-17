@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { ADD_TO_CART } from '../store/slice/AddCartSlice';
@@ -6,20 +7,32 @@ import {
     selectCarList
 } from '../store/slice/CarListSlice';
 import Button from './Button';
+import { useFilterItem } from '../hook/useFilterItem';
 
 type Props = {}
 
 const CarList = (props: Props) => {
     const dispatch = useDispatch();
     const carList = useSelector(selectCarList)
-
+    const [sort, setSort] = useState("latest");
+    const { filterData } = useFilterItem({ "sort": sort, "carList": carList });
     const addToCart = (cart: any) => {
         dispatch(ADD_TO_CART(cart));
     };
 
     return (
         <ul className="divide-y divide-gray-200 border-t border-b border-gray-200">
-            {carList.length > 0 && carList.map((car: any, index: number) => {
+            <div className='flex justify-between'>
+                <label className='flex items-center justify-center'>Sort by:</label>
+                <select value={sort} onChange={(e) => setSort(e.target.value)} className="mt-1 block w-34 rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                    <option value="latest">Latest</option>
+                    <option value="lowest-price">Lowest Price</option>
+                    <option value="highest-price">Highest Price</option>
+                    <option value="a-z">A - Z</option>
+                    <option value="z-a">Z - A</option>
+                </select>
+            </div>
+            {filterData.length > 0 && filterData.map((car: any, index: number) => {
                 return (
                     <li key={car.sys?.id} className="flex py-6 sm:py-10">
                         <div className="flex-shrink-0">
