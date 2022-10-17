@@ -1,18 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+const API_URL = "https://cdn.contentful.com/spaces/vveq832fsd73/entries?content_type=car";
+const TOKEN = "VPmo2U661gTnhMVx0pc0-CtahNg_aqS5DuneLtYfO1o";
+console.log(process.env);
 export const fetchCarList = createAsyncThunk(
     'carlist/fetchCarList',
     async () => {
-        const response = await axios.get('https://cdn.contentful.com/spaces/vveq832fsd73/entries?content_type=car', {
+        const response = await axios.get(API_URL, {
             headers: {
-                'Authorization': 'Bearer VPmo2U661gTnhMVx0pc0-CtahNg_aqS5DuneLtYfO1o'
+                'Authorization': 'Bearer ' + TOKEN
             }
         })
         return response.data
     }
 )
-
 
 interface CarListState {
     carlist: any,

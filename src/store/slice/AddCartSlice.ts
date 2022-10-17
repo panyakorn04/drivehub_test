@@ -23,7 +23,7 @@ const modalSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		ADD_TO_CART: (state: AddCartState, action) => {
+		ADD_TO_CART: (state: AddCartState, action: any) => {
 			const { photo, price, title } = action.payload.fields;
 			const { id } = action.payload.sys;
 			const { quantity } = action.payload;
@@ -77,7 +77,7 @@ const modalSlice = createSlice({
 			state.grandTotal = state.total - state.discount;
 			localStorage.setItem("cartItems", JSON.stringify(state.cart));
 		},
-		DECREASE_CART(state: AddCartState, action) {
+		DECREASE_CART(state: AddCartState, action: any) {
 			const { id } = action.payload;
 			const { total, totalItems } = state;
 			const productIndex = state.cart.findIndex(
@@ -99,7 +99,7 @@ const modalSlice = createSlice({
 			state.grandTotal = state.total - state.discount;
 			localStorage.setItem("cartItems", JSON.stringify(state.cart));
 		},
-		INCREASE_CART(state: AddCartState, action) {
+		INCREASE_CART(state: AddCartState, action: any) {
 			const { id } = action.payload;
 			const { total, totalItems } = state;
 			const productIndex = state.cart.findIndex(
