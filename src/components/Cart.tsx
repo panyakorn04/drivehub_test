@@ -29,7 +29,7 @@ const Cart = (props: Props) => {
             <div>
                 <ul className="divide-y divide-gray-200">
                     {cart?.cart.map((product: any) => (
-                        <li key={product.id} className="flex py-6 px-4 sm:px-6">
+                        <li data-testid="cart list" key={product.id} className="flex py-6 px-4 sm:px-6">
                             <div className="flex-shrink-0">
                                 <img src={product.photo || ""} alt={product.title} className="w-20 rounded-md" />
                             </div>
@@ -42,11 +42,11 @@ const Cart = (props: Props) => {
                                             </Link>
                                         </h4>
                                     </div>
-                                    <div className="ml-4 flow-root flex-shrink-0">
+                                    <div className="flow-root flex-shrink-0">
                                         <button
                                             onClick={() => handleRemove(product)}
                                             type="button"
-                                            className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
+                                            className="-m-2.5 flex items-center justify-center  p-2.5 bg-gray-50 text-gray-400 hover:text-gray-500"
                                         >
                                             <TrashIcon className="h-5 w-5" aria-hidden="true" />
                                             <span className="sr-only">Remove</span>

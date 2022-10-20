@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+
 import { useDispatch } from 'react-redux';
 import { ADD_TO_CART } from '../store/slice/AddCartSlice';
 import {
@@ -55,7 +56,6 @@ const CarList = (props: Props) => {
                                     <p className="mt-1 text-sm font-medium text-gray-900">{car.fields?.price} THB/day</p>
                                 </div>
                             </div>
-
                         </div>
                         <Button>
                             <span onClick={() => addToCart(car)} >
