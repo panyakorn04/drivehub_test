@@ -4,7 +4,7 @@ const API_URL = "https://cdn.contentful.com/spaces/vveq832fsd73/entries?content_
 const TOKEN = "VPmo2U661gTnhMVx0pc0-CtahNg_aqS5DuneLtYfO1o";
 
 
-console.log(process.env);
+
 export const getCarList = async (): Promise<any> => {
     const response = await axios.get<any>(API_URL, {
         headers: {

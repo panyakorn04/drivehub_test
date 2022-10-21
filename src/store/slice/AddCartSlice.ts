@@ -10,9 +10,7 @@ interface AddCartState {
 }
 
 const initialState = {
-	cart: localStorage.getItem("cartItems")
-		? JSON.parse(localStorage.getItem("cartItems") || "")
-		: [],
+	cart: [],
 	total: 0,
 	totalItems: 0,
 	discount: 0,
@@ -21,9 +19,12 @@ const initialState = {
 
 const modalSlice = createSlice({
 	name: "cart",
-	initialState,
+	initialState: localStorage.getItem("cartItems")
+		? JSON.parse(localStorage.getItem("cartItems") || "")
+		: initialState,
 	reducers: {
 		ADD_TO_CART: (state: AddCartState, action: any) => {
+
 			const { photo, price, title } = action.payload.fields;
 			const { id } = action.payload.sys;
 			const { quantity } = action.payload;
@@ -53,7 +54,7 @@ const modalSlice = createSlice({
 			state.totalItems = totalItems + 1;
 			state.discount = 0;
 			state.grandTotal = state.total - state.discount;
-			localStorage.setItem("cartItems", JSON.stringify(state.cart));
+			localStorage.setItem("cartItems", JSON.stringify(state));
 		},
 		REMOVE_FROM_CART: (state: AddCartState, action) => {
 			const { id } = action.payload;
@@ -75,7 +76,7 @@ const modalSlice = createSlice({
 			state.totalItems = totalItems - 1;
 			state.discount = 0;
 			state.grandTotal = state.total - state.discount;
-			localStorage.setItem("cartItems", JSON.stringify(state.cart));
+			localStorage.setItem("cartItems", JSON.stringify(state));
 		},
 		DECREASE_CART(state: AddCartState, action: any) {
 			const { id } = action.payload;
@@ -97,9 +98,10 @@ const modalSlice = createSlice({
 			state.totalItems = totalItems - 1;
 			state.discount = 0;
 			state.grandTotal = state.total - state.discount;
-			localStorage.setItem("cartItems", JSON.stringify(state.cart));
+			localStorage.setItem("cartItems", JSON.stringify(state));
 		},
 		INCREASE_CART(state: AddCartState, action: any) {
+			console.log("INCREASE_CART", action.payload);
 			const { id } = action.payload;
 			const { total, totalItems } = state;
 			const productIndex = state.cart.findIndex(
@@ -113,7 +115,7 @@ const modalSlice = createSlice({
 			state.totalItems = totalItems + 1;
 			state.discount = 0;
 			state.grandTotal = state.total - state.discount;
-			localStorage.setItem("cartItems", JSON.stringify(state.cart));
+			localStorage.setItem("cartItems", JSON.stringify(state));
 		},
 		CLEAR_CART(state: AddCartState) {
 			state.cart = [];

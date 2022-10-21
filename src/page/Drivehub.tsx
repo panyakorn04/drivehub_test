@@ -14,7 +14,6 @@ const Drivehub = (props: Props) => {
         dispatch(fetchCarList())
         return () => { }
     }, [dispatch])
-
     return (
         <Layout>
             <div className="bg-white pt-10">
