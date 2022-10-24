@@ -4,11 +4,13 @@ import Cart from '../components/Cart';
 import Layout from '../components/Layout';
 import { useDispatch } from 'react-redux'
 import { fetchCarList } from '../store/slice/CarListSlice';
+import { useAuth0 } from "@auth0/auth0-react";
 
 type Props = {}
 
 const Drivehub = (props: Props) => {
     const dispatch = useDispatch<any>()
+    const { user, isAuthenticated, isLoading } = useAuth0();
 
     useEffect(() => {
         dispatch(fetchCarList())
